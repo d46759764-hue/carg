@@ -1,0 +1,11 @@
+.nav-link {
+  text-decoration: none; /* Supprime le soulignement */
+  color: inherit; /* Garde la couleur par défaut */
+}
+
+.nav-link.active {
+  background-color: #06b6d4; /* Exemple de surbrillance */
+  color: white; /* Texte en blanc sur fond bleu */
+  border-radius: 4px; /* Optionnel : coins arrondis */
+  padding: 5px 10px; /* Optionnel : un peu d’espace */
+}

@@ -1,0 +1,160 @@
+{
+  "gestionnaire": [
+    {
+      "id": "1",
+      "username": "zafe",
+      "password": "123"
+    }
+  ],
+  "cargaisons": [
+    {
+      "id": "CARG-1108-5983",
+      "numero": "CARG-1108-5983",
+      "poidsMax": 23,
+      "type": "AERIEN",
+      "distance": 1683,
+      "lieuDepart": {
+        "nom": "Avenue Cheikh Amadou Bamba Mbaké, HLM Nimzatt, HLM Fass, Commune de Gueule Tapée-Fass-Colobane, Arrondissement de Dakar-Plateau, Dakar, Région de Dakar, 13500, Sénégal",
+        "latitude": 14.693425,
+        "longitude": -17.447938,
+        "pays": "Sénégal"
+      },
+      "lieuArrivee": {
+        "nom": "Aouint Yghomane, caïdat d'Aouint Yghomane, Cercle d'Assa, Province Assa-Zag, Guelmim-Oued Noun, Maroc",
+        "latitude": 28.3347722,
+        "longitude": -10.3713379,
+        "pays": "Maroc"
+      },
+      "dateDepart": "2025-08-12T00:00:00.000Z",
+      "dateArrivee": "2025-08-13T00:00:00.000Z",
+      "etatAvancement": "EN_ATTENTE",
+      "etatGlobal": "OUVERT",
+      "colis": [],
+      "validation": true
+    },
+    {
+      "id": "CARG-1108-8124",
+      "numero": "CARG-1108-8124",
+      "poidsMax": 90,
+      "type": "MARITIME",
+      "distance": 716,
+      "lieuDepart": {
+        "nom": "Cap-Vert",
+        "latitude": 16.088042220148818,
+        "longitude": -23.972167968750004,
+        "pays": "Cap-Vert"
+      },
+      "lieuArrivee": {
+        "nom": "Avenue Cheikh Amadou Bamba Mbaké, HLM Nimzatt, HLM Fass, Commune de Gueule Tapée-Fass-Colobane, Arrondissement de Dakar-Plateau, Dakar, Région de Dakar, 13500, Sénégal",
+        "latitude": 14.693425,
+        "longitude": -17.447938,
+        "pays": "Sénégal"
+      },
+      "dateDepart": "2025-08-12T00:00:00.000Z",
+      "dateArrivee": "2025-08-12T00:00:00.000Z",
+      "etatAvancement": "EN_ATTENTE",
+      "etatGlobal": "OUVERT",
+      "colis": [],
+      "validation": true
+    },
+    {
+      "id": "CARG-1208-6046",
+      "numero": "CARG-1208-6046",
+      "poidsMax": 67,
+      "type": "ROUTIER",
+      "distance": 1052,
+      "lieuDepart": {
+        "nom": "3, Rue Casimir Périer, Quartier des Invalides, Paris 7e Arrondissement, Faubourg Saint-Germain, Paris, France métropolitaine, 75007, France",
+        "latitude": 48.8588897,
+        "longitude": 2.320041,
+        "pays": "France"
+      },
+      "lieuArrivee": {
+        "nom": "Puerta del Sol, Calle Arenal, Barrio de los Austrias, Sol, Centro, Madrid, Communauté de Madrid, 28013, Espagne",
+        "latitude": 40.4167047,
+        "longitude": -3.7035825,
+        "pays": "Espagne"
+      },
+      "dateDepart": "2025-08-12T00:00:00.000Z",
+      "dateArrivee": "2025-08-13T00:00:00.000Z",
+      "etatAvancement": "EN_ATTENTE",
+      "etatGlobal": "OUVERT",
+      "colis": [],
+      "validation": true
+    },
+    {
+      "id": "CARG-1208-3767",
+      "numero": "CARG-1208-3767",
+      "poidsMax": 65,
+      "type": "AERIEN",
+      "distance": 1608,
+      "lieuDepart": {
+        "nom": "48, Leipziger Straße, Friedrichswerder, Mitte, Berlin, 10117, Allemagne",
+        "latitude": 52.510885,
+        "longitude": 13.3989367,
+        "pays": "Allemagne"
+      },
+      "lieuArrivee": {
+        "nom": "6 к2, Сумская улица, Chertanovo Severnoye District, Moscou, District fédéral central, 117208, Russie",
+        "latitude": 55.625578,
+        "longitude": 37.6063916,
+        "pays": "Russie"
+      },
+      "dateDepart": "2025-08-13T00:00:00.000Z",
+      "dateArrivee": "2025-08-13T00:00:00.000Z",
+      "etatAvancement": "EN_COURS",
+      "etatGlobal": "FERME",
+      "colis": [],
+      "validation": true
+    },
+    {
+      "id": "CARG-1208-7856",
+      "numero": "CARG-1208-7856",
+      "poidsMax": 6000,
+      "type": "MARITIME",
+      "distance": 1561,
+      "lieuDepart": {
+        "nom": "Centro Histórico, Plaza Santa María, La Victoria, Centro, Malaga, Málaga-Costa del Sol, Malaga, Andalousie, 29012, Espagne",
+        "latitude": 36.7213028,
+        "longitude": -4.4216366,
+        "pays": "Espagne"
+      },
+      "lieuArrivee": {
+        "nom": "Piazza del Campidoglio, Campitelli, Municipio Roma I, Rome, Roma Capitale, Latium, 00120, Italie",
+        "latitude": 41.8933203,
+        "longitude": 12.4829321,
+        "pays": "Italie"
+      },
+      "dateDepart": "2025-08-13T00:00:00.000Z",
+      "dateArrivee": "2025-08-14T00:00:00.000Z",
+      "etatAvancement": "EN_ATTENTE",
+      "etatGlobal": "OUVERT",
+      "colis": [],
+      "validation": true
+    },
+    {
+      "id": "CARG-1408-6300",
+      "numero": "CARG-1408-6300",
+      "poidsMax": 54,
+      "type": "ROUTIER",
+      "distance": 922,
+      "lieuDepart": {
+        "nom": "Guerém, Valença, Região Geográfica Imediata de Valença, Região Geográfica Intermediária de Santo Antônio de Jesus, Bahia, Région Nord-est, 45413-970, Brésil",
+        "latitude": -13.325484885597936,
+        "longitude": -39.28710937500001,
+        "pays": "Brésil"
+      },
+      "lieuArrivee": {
+        "nom": "Alberto Isaacson, Martinho Campos, Região Geográfica Imediata de Dores do Indaiá, Região Geográfica Intermediária de Divinópolis, Minas Gerais, Région Sud-est, 35608-000, Brésil",
+        "latitude": -19.476950206488414,
+        "longitude": -45.08789062500001,
+        "pays": "Brésil"
+      },
+      "dateDepart": "2025-08-16T00:00:00.000Z",
+      "dateArrivee": "2025-08-16T00:00:00.000Z",
+      "etatAvancement": "EN_ATTENTE",
+      "etatGlobal": "OUVERT",
+      "colis": []
+    }
+  ]
+}
