@@ -1,0 +1,6 @@
+import { Colis } from "./Colis";
+export class ColisAlimentaire extends Colis {
+    constructor(libelle, poids, codeDeSuivi, lieuDepart, lieuArrivee, etatAvancement, etatColis, dateDepart, dateArrivee) {
+        super(libelle, poids, codeDeSuivi, lieuDepart, lieuArrivee, etatAvancement, etatColis, dateDepart, dateArrivee);
+    }
+}
