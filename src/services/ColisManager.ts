@@ -168,7 +168,7 @@ export class ColisManager {
         if (!container) return;
 
         container.innerHTML = cargaisons.map(cargaison => `
-            <div class="cargaison-item p-4 bg-gray-700 rounded-lg border border-gray-600 hover:border-cyan-400 cursor-pointer transition-all"
+            <div class="cargaison-item p-4 bg-gray-700 rounded-lg border border-gray-600 hover:border-cyan-400/50 cursor-pointer transition-all"
                  data-id="${cargaison.id}" 
                  data-type="${cargaison.type}">
                 <div class="flex items-center justify-between mb-2">
@@ -188,14 +188,27 @@ export class ColisManager {
         document.querySelectorAll('.cargaison-item').forEach(item => {
             item.addEventListener('click', () => this.selectCargaison(item as HTMLElement));
         });
+        
+        console.log('Cargaisons rendues avec événements attachés:', cargaisons.length);
     }
 
     private selectCargaison(element: HTMLElement): void {
+        console.log('Sélection de cargaison via ColisManager');
+        
         // Retirer la sélection précédente
         document.querySelectorAll('.cargaison-item').forEach(item => 
-            item.classList.remove('border-cyan-400'));
+            item.classList.remove('border-cyan-400', 'bg-cyan-500/20'));
         
         // Ajouter la sélection au nouvel élément
-        element.classList.add('border-cyan-400');
+        element.classList.add('border-cyan-400', 'bg-cyan-500/20');
+        
+        // Déclencher un événement personnalisé pour notifier la sélection
+        const event = new CustomEvent('cargaisonSelected', {
+            detail: {
+                id: element.dataset.id,
+                type: element.dataset.type
+            }
+        });
+        document.dispatchEvent(event);
     }
 }

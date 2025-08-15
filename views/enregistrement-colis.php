@@ -141,7 +141,7 @@
             <button type="button" id="cancel-selection" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-500">
                 Annuler
             </button>
-            <button type="button" id="confirm-selection" class="px-4 py-2 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 cursor-pointer" disabled>
+            <button type="button" id="confirm-selection" class="px-4 py-2 bg-cyan-500 text-white rounded-lg opacity-50 cursor-not-allowed" disabled>
                 Confirmer la sélection
             </button>
         </div>

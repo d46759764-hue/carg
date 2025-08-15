@@ -72,45 +72,6 @@ class EnregistrementColis {
                 this.validerEtEnregistrerColis();
             });
         }
-
-        // Gestion du bouton de confirmation
-        this.confirmButton?.addEventListener('click', () => {
-            if (this.selectedCargaisonData) {
-                // Mettre à jour l'UI
-                this.currentColisData = {
-                    type: (document.getElementById('package-product-type') as HTMLSelectElement).value,
-                    poids: Number((document.getElementById('package-weight') as HTMLInputElement).value),
-                    libelle: (document.getElementById('libelle-produit') as HTMLInputElement).value
-                };
-
-                // Fermer le modal
-                if (this.modal) {
-                    this.modal.classList.add('opacity-0', 'pointer-events-none');
-                }
-
-                // Activer le bouton de soumission du formulaire principal
-                const submitButton = document.querySelector('#register-package-form button[type="submit"]');
-                if (submitButton) {
-                    submitButton.removeAttribute('disabled');
-                }
-
-                // Afficher un toast de confirmation
-                this.showSuccess(`Cargaison ${this.selectedCargaisonData.id} sélectionnée`);
-
-                // Stocker l'ID de la cargaison pour la soumission
-                const form = document.getElementById('register-package-form') as HTMLFormElement;
-                if (form) {
-                    let hiddenInput = form.querySelector('input[name="cargaison-id"]');
-                    if (!hiddenInput) {
-                        hiddenInput = document.createElement('input');
-                        hiddenInput.setAttribute('type', 'hidden');
-                        hiddenInput.setAttribute('name', 'cargaison-id');
-                        form.appendChild(hiddenInput);
-                    }
-                    (hiddenInput as HTMLInputElement).value = this.selectedCargaisonData.id;
-                }
-            }
-        });
     }
 
     private async ouvrirModalCargaisons(typeColis: string): Promise<void> {
@@ -198,29 +159,32 @@ class EnregistrementColis {
             return;
         }
 
-        // Vérifier qu'une cargaison est sélectionnée
-        if (!this.selectedCargaisonData) {
-            this.showError("Veuillez d'abord sélectionner une cargaison en choisissant un type de colis.");
+        // Récupérer l'ID de la cargaison depuis le champ caché
+        const form = document.getElementById('register-package-form') as HTMLFormElement;
+        const hiddenInput = form?.querySelector('input[name="cargaison-id"]') as HTMLInputElement;
+        const cargaisonId = hiddenInput?.value;
+        
+        if (!cargaisonId) {
+            this.showError("Veuillez d'abord sélectionner une cargaison en choisissant un type de colis et en confirmant votre sélection.");
             return;
         }
 
         try {
-            console.log('Enregistrement du colis:', colisData, 'dans la cargaison:', this.selectedCargaisonData);
+            console.log('Enregistrement du colis:', colisData, 'dans la cargaison:', cargaisonId);
             
             const result = await this.colisManager.ajouterColisACargaison(
-                this.selectedCargaisonData.id, 
+                cargaisonId, 
                 colisData
             );
 
             if (result) {
                 this.showSuccessModal(
                     "Colis enregistré avec succès !", 
-                    `Le colis "${colisData.libelle}" (${colisData.poids}kg) a été ajouté à la cargaison ${this.selectedCargaisonData.id}`
+                    `Le colis "${colisData.libelle}" (${colisData.poids}kg) a été ajouté à la cargaison ${cargaisonId}`
                 );
                 
                 // Réinitialiser le formulaire
                 this.reinitialiserFormulaire();
-                this.fermerModal();
             }
         } catch (error) {
             console.error('Erreur lors de l\'enregistrement:', error);
@@ -255,9 +219,21 @@ class EnregistrementColis {
         const form = document.getElementById('register-package-form') as HTMLFormElement;
         if (form) {
             form.reset();
+            // Supprimer le champ caché de l'ID de cargaison
+            const hiddenInput = form.querySelector('input[name="cargaison-id"]');
+            if (hiddenInput) {
+                hiddenInput.remove();
+            }
         }
         this.selectedCargaisonData = null;
         this.currentColisData = null;
+        
+        // Désactiver le bouton de confirmation
+        if (this.confirmButton) {
+            this.confirmButton.disabled = true;
+            this.confirmButton.classList.add('opacity-50', 'cursor-not-allowed');
+            this.confirmButton.classList.remove('hover:bg-cyan-600');
+        }
     }
 
     private initializeModals(): void {
@@ -274,6 +250,9 @@ class EnregistrementColis {
 
         // Gérer la confirmation de sélection
         this.confirmButton?.addEventListener('click', () => {
+            console.log('Bouton confirmer cliqué');
+            console.log('Cargaison sélectionnée:', this.selectedCargaisonData);
+            
             if (this.selectedCargaisonData && this.currentColisData) {
                 try {
                     // Fermer le modal
@@ -293,6 +272,45 @@ class EnregistrementColis {
                     console.error('Erreur lors de la confirmation:', error);
                     this.showError("Une erreur est survenue lors de la sélection de la cargaison");
                 }
+            } else if (this.selectedCargaisonData) {
+                // Si une cargaison est sélectionnée mais pas de données de colis
+                console.log('Confirmation de sélection sans données de colis');
+                
+                try {
+                    // Stocker l'ID de la cargaison pour la soumission
+                    const form = document.getElementById('register-package-form') as HTMLFormElement;
+                    if (form) {
+                        let hiddenInput = form.querySelector('input[name="cargaison-id"]') as HTMLInputElement;
+                        if (!hiddenInput) {
+                            hiddenInput = document.createElement('input');
+                            hiddenInput.setAttribute('type', 'hidden');
+                            hiddenInput.setAttribute('name', 'cargaison-id');
+                            form.appendChild(hiddenInput);
+                        }
+                        hiddenInput.value = this.selectedCargaisonData.id;
+                    }
+
+                    // Fermer le modal
+                    this.modal?.classList.add('opacity-0', 'pointer-events-none');
+                    
+                    // Afficher un message de succès
+                    this.showSuccess(
+                        `Cargaison ${this.selectedCargaisonData.id} sélectionnée. Vous pouvez maintenant enregistrer le colis.`
+                    );
+                    
+                    // Réinitialiser la sélection pour permettre une nouvelle sélection si nécessaire
+                    this.selectedCargaisonData = null;
+                    if (this.confirmButton) {
+                        this.confirmButton.disabled = true;
+                    }
+                    
+                } catch (error) {
+                    console.error('Erreur lors de la confirmation:', error);
+                    this.showError("Une erreur est survenue lors de la sélection de la cargaison");
+                }
+            } else {
+                console.log('Aucune cargaison sélectionnée');
+                this.showError("Veuillez d'abord sélectionner une cargaison");
             }
         });
 
@@ -300,6 +318,9 @@ class EnregistrementColis {
         const closeModal = () => {
             this.modal?.classList.add('opacity-0', 'pointer-events-none');
             this.selectedCargaisonData = null;
+            if (this.confirmButton) {
+                this.confirmButton.disabled = true;
+            }
         };
 
         cancelButton?.addEventListener('click', closeModal);
@@ -393,16 +414,23 @@ class EnregistrementColis {
         // Désélectionner tous les autres éléments
         document.querySelectorAll('.cargaison-item').forEach(el => {
             el.classList.remove('bg-cyan-500/20', 'border-cyan-400');
+            el.classList.add('border-gray-600');
         });
 
         // Sélectionner l'élément actuel
         item.classList.add('bg-cyan-500/20', 'border-cyan-400');
+        item.classList.remove('border-gray-600');
 
         this.selectedCargaisonData = { id, type };
         
+        // Activer le bouton de confirmation
         if (this.confirmButton) {
             this.confirmButton.disabled = false;
+            this.confirmButton.classList.remove('opacity-50', 'cursor-not-allowed');
+            this.confirmButton.classList.add('hover:bg-cyan-600');
         }
+        
+        console.log('Bouton de confirmation activé');
     }
 
     private showSuccessModal(title: string, message: string): void {
